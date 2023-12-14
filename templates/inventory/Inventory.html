@@ -2,22 +2,22 @@
 
 {% load static %}
 {% load widget_tweaks %}
-{% block title %}Clientes{% endblock title %}
+{% block title %}Inventario{% endblock title %}
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'index/css/b4.css' %}">
 <script src="{% static 'index/js/b4.js' %}"></script>
 
 
-<div id="AgregarPersonalModal" class="modal" style="overflow: scroll;">
+<div id="AddProductModal" class="modal" style="overflow: scroll;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-info">
-                <h5 class="modal-title text-dark">Agregar nuevo</h5>
+                <h5 class="modal-title text-dark">Agregar Producto</h5>
             </div>
             <div class="modal-body bg-dark text-white">
-                <form method="POST" action="{% url 'clients_app:add_client' %}" enctype="multipart/form-data">{% csrf_token %}
-                    {% for field in add_client_form %}
+                <form method="POST" action="{% url 'inventory_app:add_product' %}" enctype="multipart/form-data">{% csrf_token %}
+                    {% for field in add_product_form %}
                     <p>{{field.label}} <br>
                         {{field|add_class:"form-control text-dark"}}</p>
                     {% for error in field.errors %}
@@ -41,16 +41,16 @@
     </div>
 </div>
 
-<div id="EditClientModal" class="modal">
+<div id="EditProductModal" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-info">
                 <h5 class="modal-title text-dark">Editar</h5>
             </div>
             <div class="modal-body bg-dark text-white">
-                <form method="POST" action="{% url 'clients_app:edit_client' %}" enctype="multipart/form-data">{% csrf_token %}
+                <form method="POST" action="{% url 'inventory_app:edit_product' %}" enctype="multipart/form-data">{% csrf_token %}
                     <input type="hidden" id="edit_client_id" name="edit_client_id">
-                    {% for field in edit_client_form %}
+                    {% for field in edit_product_form %}
                     <p> {{field.label}} <br>
                         {{field|add_class:"form-control"}}</p>
                     {% for error in field.errors %}
@@ -74,7 +74,7 @@
     </div>
 </div>
 
-<div id="DeleteClientModal" class="modal">
+<div id="DeleteProductModal" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-info">
@@ -82,8 +82,8 @@
             </div>
             <div class="modal-body bg-dark text-white">
                 <p class="labelmodal">¿Estás seguro?</p>
-                <form method="POST" action="{% url 'clients_app:delete_client' %}">{% csrf_token %}
-                    <input type="hidden" id="delete_client_id" name="delete_client_id">
+                <form method="POST" action="{% url 'inventory_app:delete_product' %}">{% csrf_token %}
+                    <input type="hidden" id="delete_product_id" name="delete_product_id">
             </div>
             <div class="modal-footer bg-dark text-white">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -100,12 +100,12 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h3 class="text-center">Clientes   <i class="fas fa-users"></i></h3>
+        <h3 class="text-center">Productos    <i class="fas fa-cart-arrow-down"></i></h3>
         <div class="col-md-3 pb-2">
-            <a href="#AgregarPersonalModal"
+            <a href="#AddProductModal"
                 data-toggle="modal" data-dismiss="modal">
                 <button type="button" class="btn btn-success">
-                    Agregar Cliente
+                    Agregar Producto
                     <i class="fas fa-plus-circle"></i>
                 </button>
             </a>
@@ -114,24 +114,31 @@
             <table class="table table-hover table-primary" id="myTable">
                 <thead>
                     <tr>
-                        <th>Código de Cliente</th>
-                        <th>Nombre</th>
-                        <th>Telefono</th>
+                        <th>Codigo</th>
+                        <th>Producto</th>
+                        <th>Detalles</th>
+                        <th>Precio</th>
+                        <th>Inventario</th>
+                        <th>Inventario</th>                        
                         <th>Opciones</th>
+
                     </tr>
                 </thead>
                 <tbody class="text-dark">
-                    {% for i in clients %}
+                    {% for i in products %}
                     <tr>
                         <td>{{i.code}}</td>
-                        <td>{{i.name}} {{i.last_name}}</td>
-                        <td>{{i.phone}}</td>
+                        <td>{{i.product}}</td>
+                        <td>{{i.description}}</td>
+                        <td>{{i.price}} $</td>
+                        <td>{{i.stock}}</td>
+                        <td><img src="{{i.image.url}}" alt="error" width="100px"></td>
                         <td>
-                            <button onclick="editClient('{{i.id}}', '{{i.name}}', '{{i.last_name}}', '{{i.phone}}',)" class="btn btn-dark-outline btn-sm" data-toggle="modal"
-                                href="#EditClientModal"><img src="{% static 'index/img/editar.png' %}" alt="Error"
+                            <button onclick="editProduct('{{i.id}}', '{{i.product}}', '{{i.description}}', '{{i.image}}', '{{i.price}}', '{{i.stock}}',)" class="btn btn-dark-outline btn-sm" data-toggle="modal"
+                                href="#EditProductModal"><img src="{% static 'index/img/editar.png' %}" alt="Error"
                                     width="30"></button>
-                            <button onclick="deleteClient('{{i.id}}')" class="btn btn-dark-outline btn-sm"
-                                data-toggle="modal" href="#DeleteClientModal"><img
+                            <button onclick="deleteProduct('{{i.id}}')" class="btn btn-dark-outline btn-sm"
+                                data-toggle="modal" href="#DeleteProductModal"><img
                                     src="{% static 'index/img/delete.png' %}" alt="Error" width="30"></button>
                         </td>
                     </tr>

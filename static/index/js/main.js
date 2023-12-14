@@ -23,16 +23,20 @@ function editarEquipo(id, area, codigo, descripcion) {
   document.getElementById("descripcion_editar").value = descripcion;
 }
 
-function editarProduct(id, precio, descripcion, costo, cantidad, categoria, servicio) {
-  document.getElementById("id_producto_editar").value = id;
-  document.getElementById("precio_editar").value = precio;
-  document.getElementById("descripcion_editar").value = descripcion;
-  document.getElementById("costo_editar").value = costo;
-  document.getElementById("cantidad_editar").value = cantidad;
-  document.getElementById("categoria_editar").value = categoria;
-  if (servicio=='True'){
-    document.getElementById('servicio_editar').checked=true;
-  }
+function deleteProduct(id) {
+  document.getElementById("delete_product_id").value = id;
+}
+
+function editProduct(id, product, description, image, price, stock) {
+  document.getElementById("edit_product_id").value = id;
+  document.getElementById("edit_product").value = product;
+  document.getElementById("edit_description").value = description;
+  document.getElementById("edit_image").value = image;
+  document.getElementById("edit_price").value = price;
+  document.getElementById("edit_stock").value = stock;
+  // if (servicio=='True'){
+  //   document.getElementById('servicio_editar').checked=true;
+  // }
 }
 
 function historialPreventivo(id,solicitadoh,supervisado,responsable, subtotalpiezas, subtotalmo, fecha) {
