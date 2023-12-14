@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+{% for product in products %}
+<h1>{{product.code}}</h1>
+<h1>{{product.product}}</h1>
+<h1>{{product.desciption}}</h1>
+<h1>{{product.price}}</h1>
+{% endfor %}
+{% endblock content %}
