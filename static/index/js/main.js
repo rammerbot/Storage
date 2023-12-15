@@ -23,17 +23,32 @@ function editarEquipo(id, area, codigo, descripcion) {
   document.getElementById("descripcion_editar").value = descripcion;
 }
 
+// Edit Clients
+function editClient(id, name, last_name, phone) {
+  document.getElementById("edit_client_id").value = id;
+  document.getElementById("edit_name").value = name;
+  document.getElementById("edit_last_name").value = last_name;
+  document.getElementById("edit_phone").value = phone;
+}
+
+// delete Clients
+function deleteClient(id) {
+  document.getElementById("delete_client_id").value = id;
+}
+
+// Delete Products
 function deleteProduct(id) {
   document.getElementById("delete_product_id").value = id;
 }
 
+// Edit Poducts
 function editProduct(id, product, description, image, price, stock) {
   document.getElementById("edit_product_id").value = id;
   document.getElementById("edit_product").value = product;
   document.getElementById("edit_description").value = description;
-  document.getElementById("edit_image").value = image;
   document.getElementById("edit_price").value = price;
   document.getElementById("edit_stock").value = stock;
+  document.getElementById("edit_image").value = image;
   // if (servicio=='True'){
   //   document.getElementById('servicio_editar').checked=true;
   // }
@@ -98,16 +113,8 @@ function eliminarProducto(id) {
   document.getElementById("id_producto_eliminar").value = id;
 }
 
-function editClient(id, name, last_name, phone) {
-  document.getElementById("edit_client_id").value = id;
-  document.getElementById("edit_name").value = name;
-  document.getElementById("edit_last_name").value = last_name;
-  document.getElementById("edit_phone").value = phone;
-}
 
-function deleteClient(id) {
-  document.getElementById("delete_client_id").value = id;
-}
+
 
 function borrarContent(){
   document.getElementById("search").value = "";

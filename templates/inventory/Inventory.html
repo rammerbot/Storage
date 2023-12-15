@@ -49,7 +49,7 @@
             </div>
             <div class="modal-body bg-dark text-white">
                 <form method="POST" action="{% url 'inventory_app:edit_product' %}" enctype="multipart/form-data">{% csrf_token %}
-                    <input type="hidden" id="edit_client_id" name="edit_client_id">
+                    <input type="hidden" id="edit_product_id" name="edit_product_id">
                     {% for field in edit_product_form %}
                     <p> {{field.label}} <br>
                         {{field|add_class:"form-control"}}</p>
@@ -134,7 +134,7 @@
                         <td>{{i.stock}}</td>
                         <td><img src="{{i.image.url}}" alt="error" width="100px"></td>
                         <td>
-                            <button onclick="editProduct('{{i.id}}', '{{i.product}}', '{{i.description}}', '{{i.image}}', '{{i.price}}', '{{i.stock}}',)" class="btn btn-dark-outline btn-sm" data-toggle="modal"
+                            <button onclick="editProduct('{{i.id}}', '{{i.product}}', '{{i.description}}', '{{i.image.url}}', '{{i.price}}', '{{i.stock}}',)" class="btn btn-dark-outline btn-sm" data-toggle="modal"
                                 href="#EditProductModal"><img src="{% static 'index/img/editar.png' %}" alt="Error"
                                     width="30"></button>
                             <button onclick="deleteProduct('{{i.id}}')" class="btn btn-dark-outline btn-sm"

@@ -35,14 +35,14 @@ def edit_product_view(request):
     if request.POST:
         product = Product.objects.get(pk=request.POST.get('edit_product_id'))
         form = EditProductForm(request.POST, request.FILES, instance=product)
-    if form.is_valid:
-        try:
-            form.save()
-        except:
-            messages(request, "Error al agregar el producto nuevo")
-            return redirect('inventory_app:inventory')
+        if form.is_valid:
+            try:
+                form.save()
+            except:
+                messages(request, "Error al agregar el producto nuevo")
+                return redirect('inventory_app:inventory')
 
-    return redirect('inventary_app:inventory')
+    return redirect('inventory_app:inventory')
 
 
 def delete_product_view(request):

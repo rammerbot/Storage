@@ -56,6 +56,7 @@ LOCAL_APPS = [
 
 THIRDS_APPS = [
     'widget_tweaks',
+    'django.contrib.humanize',
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRDS_APPS
